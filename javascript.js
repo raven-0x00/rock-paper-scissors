@@ -20,18 +20,12 @@ function getComputerChoice(){
     }
 }
 
-let computerChoice = getComputerChoice()
-
-// Get human choice and store in a variable
-
-let humanChoice = prompt("Rock, paper, or scissors?")
-
+// Format human choice to be case insensitive.
 function getHumanChoice(choice) {
     choice = choice.toLocaleLowerCase();
     return choice;
 }
 
-humanChoice = getHumanChoice(humanChoice);
 
 // Implement game logic (round logic)
 
@@ -76,22 +70,32 @@ function playRound(humanChoice, computerChoice) {
 }
 
 // Implement entire game logic
-function playRound() {
-    
+function playGame () {
+    for (let i = 0; i < 5; i++) {
+        // Get human and computer choices and store in a variable
+        let humanChoice = prompt("Rock, paper, or scissors?")
+        humanChoice = getHumanChoice(humanChoice);
+        let computerChoice = getComputerChoice()
+
+        let winner = playRound(humanChoice, computerChoice);
+
+        if (winner === "human") {
+            console.log(`You win! ${humanChoice} beats ${computerChoice}, your score: ${humanScore}, computer score: ${computerScore}`)
+        } else if (winner === "computer") {
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}, your score: ${humanScore}, computer score: ${computerScore}`)
+        } else {
+            console.log(`It's a tie!, your score: ${humanScore}, computer score: ${computerScore}`)
+        }
+    }
+    if (humanScore > computerScore) {
+        console.log(`Congratulations! You have won the game!`)
+    } else if (humanScore < computerScore) {
+        console.log(`Good luck next time! Computer wins!`)
+    }
+    else {
+        console.log(`It's a tie!`)
+    }
 }
 
 
-
-
-
-
-
-
-// let winner = playRound(humanChoice, computerChoice);
-// if (winner === "human") {
-//     console.log(`You win! ${humanChoice} beats ${computerChoice}, your score: ${humanScore}, computer score: ${computerScore}`)
-// } else if (winner === "computer") {
-//     console.log(`You lose! ${computerChoice} beats ${humanChoice}, your score: ${humanScore}, computer score: ${computerScore}`)
-// } else {
-//     console.log(`It's a tie!, your score: ${humanScore}, computer score: ${computerScore}`)
-// }
+playGame()
